@@ -261,15 +261,13 @@ public class ChessGameEngine{
                         "Illegal move",
                         JOptionPane.ERROR_MESSAGE );
                 }
-                else
-                {
                     JOptionPane.showMessageDialog(
                         squareClicked,
                         "You tried to pick up an empty square! "
                             + "Get some glasses and pick a valid square.",
                         "Illegal move",
                         JOptionPane.ERROR_MESSAGE );
-                }
+
             }
         }
         else
@@ -301,11 +299,7 @@ public class ChessGameEngine{
                 }
                 firstClick = true;
             }
-            else
-            // user is just unselecting the current piece
-            {
                 firstClick = true;
-            }
         }
     }
 }
