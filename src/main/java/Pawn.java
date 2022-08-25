@@ -1,5 +1,7 @@
 import javax.swing.ImageIcon;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map;
 // -------------------------------------------------------------------------
 /**
  * Represents a Pawn game piece. Unique in that it can move two locations on its
@@ -12,9 +14,15 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Pawn
-    extends ChessGamePiece{
+        extends ChessGamePiece{
     private boolean notMoved;
     // ----------------------------------------------------------
+
+    /**
+     * Map to link the piece color to it's path
+     * */
+    private Map<Integer, String> colors;
+
     /**
      * Create a new Pawn object.
      *
@@ -49,12 +57,12 @@ public class Pawn
             notMoved = false;
             possibleMoves = calculatePossibleMoves( board );
             if ( ( getColorOfPiece() == ChessGamePiece.BLACK && row == 7 )
-                || ( getColorOfPiece() == ChessGamePiece.WHITE && row == 0 ) ){ // pawn has reached the end of the board, promote it to queen
+                    || ( getColorOfPiece() == ChessGamePiece.WHITE && row == 0 ) ){ // pawn has reached the end of the board, promote it to queen
                 board.getCell( row, col ).setPieceOnSquare( new Queen(
-                    board,
-                    row,
-                    col,
-                    getColorOfPiece() ) );
+                        board,
+                        row,
+                        col,
+                        getColorOfPiece() ) );
             }
             return true;
         }
@@ -73,16 +81,16 @@ public class Pawn
         ArrayList<String> moves = new ArrayList<String>();
         if ( isPieceOnScreen() ){
             int currRow =
-                getColorOfPiece() == ChessGamePiece.WHITE
-                    ? ( pieceRow - 1 )
-                    : ( pieceRow + 1 );
+                    getColorOfPiece() == ChessGamePiece.WHITE
+                            ? ( pieceRow - 1 )
+                            : ( pieceRow + 1 );
             int count = 1;
             int maxIter = notMoved ? 2 : 1;
             // check for normal moves
             while ( count <= maxIter ){ // only loop while we have open slots and have not passed our
-              // limit
+                // limit
                 if ( isOnScreen( currRow, pieceColumn )
-                    && board.getCell( currRow,
+                        && board.getCell( currRow,
                         pieceColumn ).getPieceOnSquare() == null ){
                     moves.add( currRow + "," + pieceColumn );
                 }
@@ -91,9 +99,9 @@ public class Pawn
                     break;
                 }
                 currRow =
-                    ( getColorOfPiece() == ChessGamePiece.WHITE )
-                        ? ( currRow - 1 )
-                        : ( currRow + 1 );
+                        ( getColorOfPiece() == ChessGamePiece.WHITE )
+                                ? ( currRow - 1 )
+                                : ( currRow + 1 );
                 count++;
             }
             // check for enemy capture points
@@ -117,6 +125,17 @@ public class Pawn
         }
         return moves;
     }
+
+    /**
+     * Sets the piece colors to their paths
+     * */
+    private void setPieceColors(){
+        this.colors = Map.ofEntries(
+                new AbstractMap.SimpleEntry<>(ChessGamePiece.BLACK, "chessImages/BlackKnight.gif"),
+                new AbstractMap.SimpleEntry<>(ChessGamePiece.WHITE, "chessImages/WhiteKnight.gif")
+        );
+    }
+
     /**
      * Creates an icon for this piece depending on the piece's color.
      *
@@ -124,21 +143,25 @@ public class Pawn
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/WhitePawn.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/BlackPawn.gif")
-            );            
-        }
-        else
+
+        setPieceColors();
+
+        // looping over colors
+        for (Integer color : this.colors.keySet())
         {
-            return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif")
-            );           
+            // search for path
+            String imagePath = this.colors.get(color);
+
+            if( getColorOfPiece() == color){
+                return new ImageIcon(
+                        getClass().getResource(imagePath)
+                );
+            }
         }
+
+        return new ImageIcon(
+                getClass().getResource("chessImages/default-Unassigned.gif")
+        );
+
     }
 }
