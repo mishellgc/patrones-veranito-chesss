@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 // -------------------------------------------------------------------------
@@ -13,7 +14,7 @@ import javax.swing.ImageIcon;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public abstract class ChessGamePiece{
+public abstract class ChessGamePiece implements Serializable {
     private boolean             skipMoveGeneration;
     private int                 pieceColor;
     private ImageIcon           pieceImage;
@@ -42,6 +43,12 @@ public abstract class ChessGamePiece{
      * Represents a piece that has not been assigned a color
      */
     static final int            UNASSIGNED = -1;
+    /* Add variables
+    * */
+    static final String north = "North";
+    static final String south = "South";
+    static final String west = "West";
+    static final String east = "East";
     // ----------------------------------------------------------
     /**
      * Create a new GamePiece object.
@@ -275,14 +282,14 @@ public abstract class ChessGamePiece{
         int count = 0;
         if ( isPieceOnScreen() ){
             for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if(oneDirection == "North" && twoDirection == "West"){
+                if(oneDirection.equals(north) && twoDirection.equals(west)){
                     piece_row_direction = pieceRow - i;
                     piece_col_direction = pieceColumn - i;
                     System.out.println("entre");
-                } else if(oneDirection == "North" && twoDirection == "East"){
+                } else if(oneDirection.equals(north) && twoDirection.equals(east)){
                     piece_row_direction = pieceRow - i;
                     piece_col_direction = pieceColumn + i;
-                } else if(oneDirection == "South" && twoDirection == "West"){
+                } else if(oneDirection.equals(south) && twoDirection.equals(west)){
                     piece_row_direction = pieceRow + i;
                     piece_col_direction = pieceColumn - i;
                 } else {

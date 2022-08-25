@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -231,8 +232,7 @@ public class ChessGameBoard extends JPanel{
      * @author Myles David (davidmm2)
      * @version 2010.11.16
      */
-    private class BoardListener
-        implements MouseListener
+    private class BoardListener implements MouseListener, Serializable
     {
         /**
          * Do an action when the left mouse button is clicked.
