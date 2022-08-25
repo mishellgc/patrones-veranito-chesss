@@ -147,7 +147,7 @@ public abstract class ChessGamePiece implements Serializable {
                     moves.add( i + "," + pieceColumn );
                     count++;
                     if ( isEnemy( board, i, pieceColumn ) ){
-                        break;
+                        continue;
                     }
                 }
                 else
@@ -181,7 +181,7 @@ public abstract class ChessGamePiece implements Serializable {
                     moves.add( i + "," + pieceColumn );
                     count++;
                     if ( isEnemy( board, i, pieceColumn ) ){
-                        break;
+                        continue;
                     }
                 }
                 else
@@ -215,7 +215,7 @@ public abstract class ChessGamePiece implements Serializable {
                     moves.add( pieceRow + "," + i );
                     count++;
                     if ( isEnemy( board, pieceRow, i ) ){
-                        break;
+                        continue;
                     }
                 }
                 else
@@ -249,7 +249,7 @@ public abstract class ChessGamePiece implements Serializable {
                     moves.add( pieceRow + "," + i );
                     count++;
                     if ( isEnemy( board, pieceRow, i ) ){
-                        break;
+                        continue;
                     }
                 }
                 else
@@ -304,7 +304,7 @@ public abstract class ChessGamePiece implements Serializable {
                 else if ( isEnemy( board, pieceRowDirection, pieceColDirection ) ){
                     moves.add( (pieceRowDirection) + "," + ( pieceColDirection ) );
                     count++;
-                    break;
+                    continue;
                 }
                 else
                 {
