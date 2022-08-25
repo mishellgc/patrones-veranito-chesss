@@ -45,10 +45,10 @@ public abstract class ChessGamePiece implements Serializable {
     static final int            UNASSIGNED = -1;
     /* Add variables
     * */
-    static final String north = "North";
-    static final String south = "South";
-    static final String west = "West";
-    static final String east = "East";
+    static final String norte = "North";
+    static final String sur = "South";
+    static final String oeste = "West";
+    static final String este = "East";
     // ----------------------------------------------------------
     /**
      * Create a new GamePiece object.
@@ -62,7 +62,7 @@ public abstract class ChessGamePiece implements Serializable {
      * @param pieceColor
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -94,7 +94,7 @@ public abstract class ChessGamePiece implements Serializable {
      * @param pieceColor
      *            either GamePiece.BLACK, WHITE, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -282,14 +282,14 @@ public abstract class ChessGamePiece implements Serializable {
         int count = 0;
         if ( isPieceOnScreen() ){
             for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if(oneDirection.equals(north) && twoDirection.equals(west)){
+                if(oneDirection.equals(norte) && twoDirection.equals(oeste)){
                     piece_row_direction = pieceRow - i;
                     piece_col_direction = pieceColumn - i;
                     System.out.println("entre");
-                } else if(oneDirection.equals(north) && twoDirection.equals(east)){
+                } else if(oneDirection.equals(norte) && twoDirection.equals(este)){
                     piece_row_direction = pieceRow - i;
                     piece_col_direction = pieceColumn + i;
-                } else if(oneDirection.equals(south) && twoDirection.equals(west)){
+                } else if(oneDirection.equals(sur) && twoDirection.equals(oeste)){
                     piece_row_direction = pieceRow + i;
                     piece_col_direction = pieceColumn - i;
                 } else {
@@ -301,12 +301,10 @@ public abstract class ChessGamePiece implements Serializable {
                         piece_col_direction ).getPieceOnSquare() == null ) ){
                     moves.add( ( piece_row_direction ) + "," + ( piece_col_direction ) );
                     count++;
-                    System.out.println("entre");
                 }
                 else if ( isEnemy( board, piece_row_direction, piece_col_direction ) ){
                     moves.add( ( piece_row_direction ) + "," + ( piece_col_direction ) );
                     count++;
-                    System.out.println("entre enemegio");
                     break;
                 }
                 else
@@ -321,33 +319,9 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateNorthWestMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = "North";
-        String twoDirection = "West";
+        String oneDirection = norte;
+        String twoDirection = oeste;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
-        /*
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if ( isOnScreen( pieceRow - i, pieceColumn - i )
-                    && ( board.getCell( pieceRow - i,
-                        pieceColumn - i ).getPieceOnSquare() == null ) ){
-                    moves.add( ( pieceRow - i ) + "," + ( pieceColumn - i ) );
-                    count++;
-                }
-                else if ( isEnemy( board, pieceRow - i, pieceColumn - i ) ){
-                    moves.add( ( pieceRow - i ) + "," + ( pieceColumn - i ) );
-                    count++;
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return moves;
-         */
     }
     // ----------------------------------------------------------
     /**
@@ -363,33 +337,9 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateNorthEastMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = "North";
-        String twoDirection = "East";
+        String oneDirection = norte;
+        String twoDirection = este;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
-        /*
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if ( isOnScreen( pieceRow - i, pieceColumn + i )
-                    && ( board.getCell( pieceRow - i,
-                        pieceColumn + i).getPieceOnSquare() == null ) ){
-                    moves.add( ( pieceRow - i ) + "," + ( pieceColumn + i ) );
-                    count++;
-                }
-                else if ( isEnemy( board, pieceRow - i, pieceColumn + i ) ){
-                    moves.add( ( pieceRow - i ) + "," + ( pieceColumn + i ) );
-                    count++;
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return moves;
-         */
     }
     // ----------------------------------------------------------
     /**
@@ -405,33 +355,9 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateSouthWestMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = "South";
-        String twoDirection = "West";
+        String oneDirection = sur;
+        String twoDirection = oeste;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
-        /*
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if ( isOnScreen( pieceRow + i, pieceColumn - i )
-                    && ( board.getCell( pieceRow + i,
-                        pieceColumn - i ).getPieceOnSquare() == null ) ){
-                    moves.add( ( pieceRow + i ) + "," + ( pieceColumn - i ) );
-                    count++;
-                }
-                else if ( isEnemy( board, pieceRow + i, pieceColumn - i ) ){
-                    moves.add( ( pieceRow + i ) + "," + ( pieceColumn - i ) );
-                    count++;
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return moves;
-         */
     }
     // ----------------------------------------------------------
     /**
@@ -447,33 +373,9 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateSouthEastMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = "South";
-        String twoDirection = "East";
+        String oneDirection = sur;
+        String twoDirection = este;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
-        /*
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if ( isOnScreen( pieceRow + i, pieceColumn + i )
-                    && ( board.getCell( pieceRow + i,
-                        pieceColumn + i ).getPieceOnSquare() == null ) ){
-                    moves.add( ( pieceRow + i ) + "," + ( pieceColumn + i ) );
-                    count++;
-                }
-                else if ( isEnemy( board, pieceRow + i, pieceColumn + i ) ){
-                    moves.add( ( pieceRow + i ) + "," + ( pieceColumn + i ) );
-                    count++;
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return moves;
-         */
     }
     /**
      * Creates the ImageIcon by the color of the piece.
