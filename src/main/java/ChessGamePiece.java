@@ -45,10 +45,10 @@ public abstract class ChessGamePiece implements Serializable {
     static final int            UNASSIGNED = -1;
     /* Add variables
     * */
-    static final String norte = "North";
-    static final String sur = "South";
-    static final String oeste = "West";
-    static final String este = "East";
+    static final String NORTE = "North";
+    static final String SUR = "South";
+    static final String OESTE = "West";
+    static final String ESTE = "East";
     // ----------------------------------------------------------
     /**
      * Create a new GamePiece object.
@@ -276,34 +276,33 @@ public abstract class ChessGamePiece implements Serializable {
             int numMoves, String oneDirection, String twoDirection ){
         // VARIABLES
         // fila y columna de la pieza depende de la dirección del movimiento
-        int piece_row_direction = 0;
-        int piece_col_direction = 0;
+        int pieceRowDirection = 0;
+        int pieceColDirection = 0;
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if ( isPieceOnScreen() ){
             for ( int i = 1; i < 8 && count < numMoves; i++ ){
-                if(oneDirection.equals(norte) && twoDirection.equals(oeste)){
-                    piece_row_direction = pieceRow - i;
-                    piece_col_direction = pieceColumn - i;
-                    System.out.println("entre");
-                } else if(oneDirection.equals(norte) && twoDirection.equals(este)){
-                    piece_row_direction = pieceRow - i;
-                    piece_col_direction = pieceColumn + i;
-                } else if(oneDirection.equals(sur) && twoDirection.equals(oeste)){
-                    piece_row_direction = pieceRow + i;
-                    piece_col_direction = pieceColumn - i;
+                if(oneDirection.equals(NORTE) && twoDirection.equals(OESTE)){
+                    pieceRowDirection = pieceRow - i;
+                    pieceColDirection = pieceColumn - i;
+                } else if(oneDirection.equals(NORTE) && twoDirection.equals(ESTE)){
+                    pieceRowDirection = pieceRow - i;
+                    pieceColDirection = pieceColumn + i;
+                } else if(oneDirection.equals(SUR) && twoDirection.equals(OESTE)){
+                    pieceRowDirection = pieceRow + i;
+                    pieceColDirection = pieceColumn - i;
                 } else {
-                    piece_row_direction = pieceRow + i;
-                    piece_col_direction = pieceColumn + i;
+                    pieceRowDirection = pieceRow + i;
+                    pieceColDirection = pieceColumn + i;
                 }
-                if ( isOnScreen( piece_row_direction, piece_col_direction )
-                        && ( board.getCell( piece_row_direction,
-                        piece_col_direction ).getPieceOnSquare() == null ) ){
-                    moves.add( ( piece_row_direction ) + "," + ( piece_col_direction ) );
+                if ( isOnScreen(pieceRowDirection, pieceColDirection )
+                        && ( board.getCell(pieceRowDirection,
+                        pieceColDirection ).getPieceOnSquare() == null ) ){
+                    moves.add( (pieceRowDirection) + "," + ( pieceColDirection ) );
                     count++;
                 }
-                else if ( isEnemy( board, piece_row_direction, piece_col_direction ) ){
-                    moves.add( ( piece_row_direction ) + "," + ( piece_col_direction ) );
+                else if ( isEnemy( board, pieceRowDirection, pieceColDirection ) ){
+                    moves.add( (pieceRowDirection) + "," + ( pieceColDirection ) );
                     count++;
                     break;
                 }
@@ -319,8 +318,8 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateNorthWestMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = norte;
-        String twoDirection = oeste;
+        String oneDirection = NORTE;
+        String twoDirection = OESTE;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
     }
     // ----------------------------------------------------------
@@ -337,8 +336,8 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateNorthEastMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = norte;
-        String twoDirection = este;
+        String oneDirection = NORTE;
+        String twoDirection = ESTE;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
     }
     // ----------------------------------------------------------
@@ -355,8 +354,8 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateSouthWestMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = sur;
-        String twoDirection = oeste;
+        String oneDirection = SUR;
+        String twoDirection = OESTE;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
     }
     // ----------------------------------------------------------
@@ -373,8 +372,8 @@ public abstract class ChessGamePiece implements Serializable {
     protected ArrayList<String> calculateSouthEastMoves(
         ChessGameBoard board,
         int numMoves ){
-        String oneDirection = sur;
-        String twoDirection = este;
+        String oneDirection = SUR;
+        String twoDirection = ESTE;
         return calculateDirectionDirectionMoves(board,numMoves, oneDirection, twoDirection);
     }
     /**
