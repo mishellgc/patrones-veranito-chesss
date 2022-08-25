@@ -37,15 +37,17 @@ public class King
      */
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> northEastMoves = calculateNorthEastMoves( board, 1 );
-        ArrayList<String> northWestMoves = calculateNorthWestMoves( board, 1 );
-        ArrayList<String> southEastMoves = calculateSouthEastMoves( board, 1 );
-        ArrayList<String> southWestMoves = calculateSouthWestMoves( board, 1 );
-        ArrayList<String> northMoves = calculateNorthMoves( board, 1 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 1 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 1 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 1 );
-        ArrayList<String> allMoves = new ArrayList<String>();
+        ArrayList<String> northEastMoves, northWestMoves, southEastMoves, southWestMoves, northMoves, southMoves,
+                eastMoves, westMoves, allMoves;
+        northEastMoves = calculateNorthEastMoves( board, 1 );
+        northWestMoves = calculateNorthWestMoves( board, 1 );
+        southEastMoves = calculateSouthEastMoves( board, 1 );
+        southWestMoves = calculateSouthWestMoves( board, 1 );
+        northMoves = calculateNorthMoves( board, 1 );
+        southMoves = calculateSouthMoves( board, 1 );
+        eastMoves = calculateEastMoves( board, 1 );
+        westMoves = calculateWestMoves( board, 1 );
+        allMoves = new ArrayList<String>();
         allMoves.addAll( northEastMoves );
         allMoves.addAll( northWestMoves );
         allMoves.addAll( southWestMoves );
